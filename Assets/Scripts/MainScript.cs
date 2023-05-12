@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Kit.Controls;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class MainScript : MonoBehaviour
@@ -14,6 +16,9 @@ public class MainScript : MonoBehaviour
 
     [SerializeField]
     private SpriteRenderer _spriteRenderer;
+    
+    private bool _alternateMode;
+    public bool AlternateMode { get => _alternateMode; set => _alternateMode = value; }
 
     private void Awake()
     {
@@ -40,6 +45,22 @@ public class MainScript : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+
+    [SerializeField] 
+    private DoorScript _buggyDoorScript;
+
+    private void Update()
+    {
+        if (ControlsScript.InGameControls.BindWithName("AlternateMode").Down)
+        {
+            _alternateMode = !_alternateMode;
+        }
+        
+        if (ControlsScript.InGameControls.BindWithName("OpenDoor").Down)
+        {
+            _buggyDoorScript.TryOpen();
+        }
     }
 
     public static bool IsVisibilityBlocked(Vector2 position1, Vector2 position2)

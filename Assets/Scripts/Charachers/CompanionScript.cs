@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
+using Kit.Controls;
 
 [System.Serializable]
 public class Command
@@ -492,12 +493,25 @@ public class CompanionScript : MoveableCharacterScript
             _movementDirection = (_path.vectorPath[0] - transform.position).normalized;
         }
     }
+    
+    private void UpdateInputMovement()
+    {
+        _movementDirection = ControlsScript.InGameControls.StickWithName("Movement 2").Vector2;
+    }
 
     protected override void Update()
     {
         base.Update();
 
-        CompanionAI();
-        Move(_movementDirection);
+        if (MainScript.Instance.AlternateMode == false)
+        {
+            CompanionAI();
+            Move(_movementDirection);
+        }
+        else
+        {
+            UpdateInputMovement();
+            Move(_movementDirection);
+        }
     }
 }

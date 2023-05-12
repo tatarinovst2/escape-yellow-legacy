@@ -83,16 +83,20 @@ public class CommandCursorScript : MonoBehaviour
         if ((ControlsScript.InGameControls.BindWithName("Command").Hold == false) && (ControlsScript.InGameControls.BindWithName("Command").Up == false))
         {
             Time.timeScale = 1f;
-            _spriteRenderer.enabled = false;
-            _commandCounter.SetActive(false);
-            _actionIconObject.SetActive(false);
-            return;
+            // _spriteRenderer.enabled = false;
+            // _commandCounter.SetActive(false);
+            // _actionIconObject.SetActive(false);
+            //return;
+        }
+        else
+        {
+            Time.timeScale = _slowMoTimeScale;
         }
 
-        _spriteRenderer.enabled = true;
-        _commandCounter.SetActive(true);
-        _actionIconObject.SetActive(true);
-        Time.timeScale = _slowMoTimeScale;
+        // _spriteRenderer.enabled = true;
+        // _commandCounter.SetActive(true);
+        // _actionIconObject.SetActive(true);
+        //Time.timeScale = _slowMoTimeScale;
 
         CheckClickableObjects();
 

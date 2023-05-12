@@ -224,7 +224,8 @@ public class DeviceScript : EnergyDevice
         UpdatePosition();
         UpdateSprites();
 
-        if ((ControlsScript.InGameControls.BindWithName("Shoot").Hold) && (_energy > 0f))
+        if ((ControlsScript.InGameControls.BindWithName("Shoot").Hold ||
+             ControlsScript.InGameControls.BindWithName("Shoot 2").Hold) && _energy > 0f)
         {
             _isFiring = true;
         }
